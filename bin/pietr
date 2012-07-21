@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require '../lib/pietr'
+
+options = {codel_size: 1, trace: false}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: pietr [options] FILE.png'
+  opts.on('-c', '--codel-size SIZE', 'Specify codel size as total area.') do |cs|
+    options[:codel_size] = cs.to_i
+  end
+  opts.on('-t', '--trace', 'Display program flow.') do |t|
+    options[:trace] = t
+  end
+end.parse!
+
+Pietr.new(ARGV[0], options).run
