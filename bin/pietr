@@ -3,7 +3,6 @@ require 'optparse'
 require '../lib/pietr'
 
 options = {codel_size: 1, trace: false}
-
 OptionParser.new do |opts|
   opts.banner = 'Usage: pietr [options] FILE.png'
   opts.on('-c', '--codel-size SIZE', 'Specify codel size as total area.') do |cs|
@@ -14,4 +13,5 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-Pietr.new(ARGV[0], options).run
+require '../lib/pietr/trace' if options[:trace]
+print Pietr.new(ARGV[0], options).run
